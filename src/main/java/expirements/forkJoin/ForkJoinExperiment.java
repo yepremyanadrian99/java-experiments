@@ -16,7 +16,7 @@ public class ForkJoinExperiment extends Experiment {
         ForkJoinPool pool = ForkJoinPool.commonPool();
         RecursiveAction task = new CustomRecursiveAction(args[0].toString());
         Void invokeResult = pool.invoke(task);
-        // 1. invoke() - submits and joins on that task and return final result.
+        // 1. invoke() - submits and joins on that task and returns final result.
         // 2. submit() - externalSubmits a task for execution. Need to join the ForkJoinTask returned,
         //    otherwise after main thread is closed the daemon thread will stop it's execution abruptly.
         //    ForkJoinTask<Void> submitResult = pool.submit(task);

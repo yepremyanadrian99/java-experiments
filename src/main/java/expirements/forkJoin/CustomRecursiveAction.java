@@ -26,7 +26,6 @@ public class CustomRecursiveAction extends RecursiveAction {
     private List<RecursiveAction> createSubtasks() {
         String workload1 = workload.substring(0, workload.length() / 2);
         String workload2 = workload.substring(workload.length() / 2);
-
         return List.of(
             new CustomRecursiveAction(workload1),
             new CustomRecursiveAction(workload2)
