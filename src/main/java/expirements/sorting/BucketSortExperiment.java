@@ -16,16 +16,18 @@ public class BucketSortExperiment extends Experiment {
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        for (int i : list) {
-            assert i >= 0 : "For BucketSort to work properly, all elements must be non-negative.";
-        }
         System.out.println("Unsorted list: " + list);
     }
 
     @Override
     protected void execute() {
+        int minElem = Collections.min(list, Integer::compareTo);
         int maxElem = Collections.max(list, Integer::compareTo);
-        bucketSort(maxElem);
+        if (minElem >= 0) {
+            bucketSort(maxElem);
+        } else {
+            bucketSortMixed(minElem, maxElem);
+        }
     }
 
     @Override
@@ -46,6 +48,23 @@ public class BucketSortExperiment extends Experiment {
         for (int i = 0; i < bucket.length; ++i) {
             for (int j = 0; j < bucket[i]; ++j) {
                 list.add(i);
+            }
+        }
+    }
+
+    private void bucketSortMixed(int minElem, int maxElem) {
+        int size = Math.abs(minElem) + Math.abs(maxElem) + 1;
+        int[] bucket = new int[size];
+        for (int i = 0; i < list.size(); ++i) {
+            bucket[i] = 0;
+        }
+        for (int i : list) {
+            ++bucket[i - minElem];
+        }
+        list.clear();
+        for (int i = 0; i < bucket.length; ++i) {
+            for (int j = 0; j < bucket[i]; ++j) {
+                list.add(i + minElem);
             }
         }
     }
