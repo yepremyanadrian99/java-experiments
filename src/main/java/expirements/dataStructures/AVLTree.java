@@ -27,32 +27,6 @@ public class AVLTree<T extends Comparable<T>> {
         return internalFind(this.root, value);
     }
 
-    public AVLNode<T> leftRotate(AVLNode<T> node) {
-        AVLNode<T> right = node.right;
-        AVLNode<T> rightLeft = right.left;
-
-        right.left = node;
-        node.right = rightLeft;
-
-        Utils.calculateAndAssignHeight(node);
-        Utils.calculateAndAssignHeight(right);
-
-        return right;
-    }
-
-    public AVLNode<T> rightRotate(AVLNode<T> node) {
-        AVLNode<T> left = node.left;
-        AVLNode<T> leftRight = left.right;
-
-        node.left.right = node;
-        node.left = leftRight;
-
-        Utils.calculateAndAssignHeight(node);
-        Utils.calculateAndAssignHeight(left);
-
-        return left;
-    }
-
     public void print() {
         System.out.print("Root: ");
         this.root.print(this.root.height, this.root.height - 1);
@@ -75,24 +49,22 @@ public class AVLTree<T extends Comparable<T>> {
         if (balanceFactor > MAX_BALANCE_FACTOR) {
             // Left case
             if (value.compareTo(node.left.value) < 0) {
-                node = rightRotate(node);
+                node = internalRightRotate(node);
             }
             // Right case
             if (value.compareTo(node.left.value) > 0) {
-                node.left = leftRotate(node.left);
-                node = rightRotate(node);
+                node = internalLeftRightRotate(node);
             }
         }
         // Right-...
         else if (balanceFactor < MIN_BALANCE_FACTOR) {
             // Right case
             if (value.compareTo(node.right.value) > 0) {
-                node = leftRotate(node);
+                node = internalLeftRotate(node);
             }
             // Left case
             if (value.compareTo(node.right.value) < 0) {
-                node.right = rightRotate(node.right);
-                node = leftRotate(node);
+                node = internalRightLeftRotate(node);
             }
         }
         return node;
@@ -109,6 +81,42 @@ public class AVLTree<T extends Comparable<T>> {
             return internalFind(node.left, value);
         }
         return internalFind(node.right, value);
+    }
+
+    private AVLNode<T> internalLeftRotate(AVLNode<T> node) {
+        AVLNode<T> right = node.right;
+        AVLNode<T> rightLeft = right.left;
+
+        right.left = node;
+        node.right = rightLeft;
+
+        Utils.calculateAndAssignHeight(node);
+        Utils.calculateAndAssignHeight(right);
+
+        return right;
+    }
+
+    private AVLNode<T> internalRightRotate(AVLNode<T> node) {
+        AVLNode<T> left = node.left;
+        AVLNode<T> leftRight = left.right;
+
+        node.left.right = node;
+        node.left = leftRight;
+
+        Utils.calculateAndAssignHeight(node);
+        Utils.calculateAndAssignHeight(left);
+
+        return left;
+    }
+
+    private AVLNode<T> internalLeftRightRotate(AVLNode<T> node) {
+        node.left = internalLeftRotate(node.left);
+        return internalRightRotate(node);
+    }
+
+    private AVLNode<T> internalRightLeftRotate(AVLNode<T> node) {
+        node.right = internalRightRotate(node.right);
+        return internalLeftRotate(node);
     }
 
     @Getter
