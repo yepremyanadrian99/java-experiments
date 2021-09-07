@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import expirements.dataStructures.AVLExperiment;
+import expirements.dataStructure.AVLExperiment;
 import expirements.executor.ExperimentExecutor;
+import expirements.pattern.strategy.StrategyPatternExperiment;
 import expirements.sorting.BubbleSortExperiment;
 import expirements.sorting.BucketSortExperiment;
 import expirements.sorting.InsertionSortExperiment;
@@ -22,6 +23,7 @@ public class MainApplication {
             .add(new BucketSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))))
             .add(new BucketSortExperiment(new ArrayList<>(Arrays.asList(5, 8, 6, 8, 0, 8, 10, 0, 8, 5, 15, 10))))
             .add(new AVLExperiment())
+            .add(new StrategyPatternExperiment())
             .startAll();
     }
 }

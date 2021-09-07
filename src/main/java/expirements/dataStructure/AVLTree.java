@@ -1,7 +1,7 @@
-package expirements.dataStructures;
+package expirements.dataStructure;
 
-import static expirements.dataStructures.Utils.MAX_BALANCE_FACTOR;
-import static expirements.dataStructures.Utils.MIN_BALANCE_FACTOR;
+import static expirements.dataStructure.Utils.MAX_BALANCE_FACTOR;
+import static expirements.dataStructure.Utils.MIN_BALANCE_FACTOR;
 
 import lombok.Getter;
 import lombok.Setter;

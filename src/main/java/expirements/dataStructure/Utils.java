@@ -1,4 +1,4 @@
-package expirements.dataStructures;
+package expirements.dataStructure;
 
 public class Utils {
 
