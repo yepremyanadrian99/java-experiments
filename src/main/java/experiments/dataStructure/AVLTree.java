@@ -41,6 +41,8 @@ public class AVLTree<T extends Comparable<T>> {
                 node.left = internalInsert(node.left, value);
             } else if (comparison < 0) {
                 node.right = internalInsert(node.right, value);
+            } else {
+                return node;
             }
         }
         Utils.calculateAndAssignHeight(node);
@@ -52,7 +54,7 @@ public class AVLTree<T extends Comparable<T>> {
                 node = internalRightRotate(node);
             }
             // Right case
-            if (value.compareTo(node.left.value) > 0) {
+            else {
                 node = internalLeftRightRotate(node);
             }
         }
@@ -63,7 +65,7 @@ public class AVLTree<T extends Comparable<T>> {
                 node = internalLeftRotate(node);
             }
             // Left case
-            if (value.compareTo(node.right.value) < 0) {
+            else {
                 node = internalRightLeftRotate(node);
             }
         }
