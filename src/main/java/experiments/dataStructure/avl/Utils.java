@@ -1,4 +1,4 @@
-package experiments.dataStructure;
+package experiments.dataStructure.avl;
 
 public class Utils {
 
@@ -18,5 +18,13 @@ public class Utils {
 
     public static <T extends Comparable<T>> int getBalanceFactor(AVLTree.AVLNode<T> node) {
         return Utils.getHeight(node.getLeft()) - Utils.getHeight(node.getRight());
+    }
+
+    public static <T extends Comparable<T>> AVLTree.AVLNode<T> getMinSuccessor(AVLTree.AVLNode<T> node) {
+        AVLTree.AVLNode<T> current = node;
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current;
     }
 }

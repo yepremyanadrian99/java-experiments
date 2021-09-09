@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import experiments.Experiment;
-import experiments.dataStructure.AVLExperiment;
+import experiments.dataStructure.avl.AVLExperiment;
 import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;

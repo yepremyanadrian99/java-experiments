@@ -1,4 +1,4 @@
-package experiments.dataStructure;
+package experiments.dataStructure.avl;
 
 import experiments.Experiment;
 
@@ -19,6 +19,7 @@ public class AVLExperiment extends Experiment {
         tree.insert(16);
         tree.insert(15);
         tree.insert(15);
+        tree.delete(5);
         tree.print();
     }
 /*
