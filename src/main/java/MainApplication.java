@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import expirements.Experiment;
-import expirements.dataStructure.AVLExperiment;
-import expirements.executor.ExperimentExecutor;
-import expirements.pattern.decorator.DecoratorExperiment;
-import expirements.pattern.strategy.StrategyPatternExperiment;
-import expirements.sorting.BubbleSortExperiment;
-import expirements.sorting.BucketSortExperiment;
-import expirements.sorting.InsertionSortExperiment;
-import expirements.sorting.MergeSortExperiment;
-import expirements.sorting.QuickSortExperiment;
-import expirements.sorting.SelectionSortExperiment;
+import experiments.Experiment;
+import experiments.dataStructure.AVLExperiment;
+import experiments.executor.ExperimentExecutor;
+import experiments.pattern.decorator.DecoratorExperiment;
+import experiments.pattern.strategy.StrategyPatternExperiment;
+import experiments.sorting.BubbleSortExperiment;
+import experiments.sorting.BucketSortExperiment;
+import experiments.sorting.InsertionSortExperiment;
+import experiments.sorting.MergeSortExperiment;
+import experiments.sorting.QuickSortExperiment;
+import experiments.sorting.SelectionSortExperiment;
 
 public class MainApplication {
 
