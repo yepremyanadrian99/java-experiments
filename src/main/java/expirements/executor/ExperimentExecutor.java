@@ -1,5 +1,6 @@
 package expirements.executor;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class ExperimentExecutor {
 
     public ExperimentExecutor add(Experiment experiment) {
         this.experiments.add(experiment);
+        return this;
+    }
+
+    public ExperimentExecutor addAll(Collection<? extends Experiment> experiments) {
+        this.experiments.addAll(experiments);
         return this;
     }
 
