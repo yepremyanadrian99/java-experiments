@@ -8,6 +8,7 @@ import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;
 import experiments.problem.rotateMatrix.RotateMatrixExperiment;
+import experiments.problem.sudokuChecker.SudokuCheckerExperiment;
 import experiments.sorting.BubbleSortExperiment;
 import experiments.sorting.BucketSortExperiment;
 import experiments.sorting.InsertionSortExperiment;
@@ -53,7 +54,8 @@ public class MainApplication {
 
     private static List<Experiment> problemExperiments() {
         return List.of(
-            new RotateMatrixExperiment()
+            new RotateMatrixExperiment(),
+            new SudokuCheckerExperiment()
         );
     }
 }

@@ -3,6 +3,7 @@ package experiments.problem.rotateMatrix;
 import java.util.Arrays;
 
 import experiments.Experiment;
+import experiments.problem.Utils;
 
 public class RotateMatrixExperiment extends Experiment {
 
@@ -16,10 +17,10 @@ public class RotateMatrixExperiment extends Experiment {
             {6, 8, 6, 8, 2}
         };
         System.out.println("Before rotation");
-        printMatrix(arr);
+        Utils.printMatrix(arr);
         rotateImage(arr);
         System.out.println("After rotation");
-        printMatrix(arr);
+        Utils.printMatrix(arr);
         int[][] expected = {
             {6, 8, 7, 6, 10},
             {8, 9, 6, 10, 9},
@@ -27,7 +28,7 @@ public class RotateMatrixExperiment extends Experiment {
             {8, 9, 8, 9, 3},
             {2, 9, 2, 7, 7}
         };
-        System.out.println("Rotation is correct: " + Arrays.deepEquals(arr, expected));
+        System.out.println("Matrix rotation works correct: " + Arrays.deepEquals(arr, expected));
     }
 
     private void rotateImage(int[][] arr) {
@@ -46,14 +47,5 @@ public class RotateMatrixExperiment extends Experiment {
         int temp = arr[i][j];
         arr[i][j] = data;
         return temp;
-    }
-
-    private void printMatrix(int[][] arr) {
-        for (int[] cols : arr) {
-            for (int value : cols) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
     }
 }
