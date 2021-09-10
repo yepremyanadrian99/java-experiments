@@ -7,6 +7,7 @@ import experiments.dataStructure.avl.AVLExperiment;
 import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;
+import experiments.problem.rotateMatrix.RotateMatrixExperiment;
 import experiments.sorting.BubbleSortExperiment;
 import experiments.sorting.BucketSortExperiment;
 import experiments.sorting.InsertionSortExperiment;
@@ -21,6 +22,7 @@ public class MainApplication {
             .addAll(sortingExperiments())
             .addAll(dataStructureExperiments())
             .addAll(patternExperiments())
+            .addAll(problemExperiments())
             .startAll();
     }
 
@@ -46,6 +48,12 @@ public class MainApplication {
         return List.of(
             new StrategyPatternExperiment(),
             new DecoratorExperiment()
+        );
+    }
+
+    private static List<Experiment> problemExperiments() {
+        return List.of(
+            new RotateMatrixExperiment()
         );
     }
 }
