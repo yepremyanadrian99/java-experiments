@@ -28,7 +28,7 @@ public class RotateMatrixExperiment extends Experiment {
             {8, 9, 8, 9, 3},
             {2, 9, 2, 7, 7}
         };
-        System.out.println("Matrix rotation works correct: " + Arrays.deepEquals(arr, expected));
+        System.out.println("Matrix rotation works correctly: " + Arrays.deepEquals(arr, expected));
     }
 
     private void rotateImage(int[][] arr) {

@@ -22,7 +22,7 @@ public class SudokuCheckerExperiment extends Experiment {
             {'.', '.', '.', '5', '.', '.', '.', '7', '.'}
         };
         Utils.printMatrix(input);
-        System.out.println("Sudoku checker works correct: " + sudoku2(input));
+        System.out.println("Sudoku checker works correctly: " + sudoku2(input));
     }
 
     boolean sudoku2(char[][] grid) {
