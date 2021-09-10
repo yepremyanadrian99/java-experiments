@@ -7,6 +7,7 @@ import experiments.dataStructure.avl.AVLExperiment;
 import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;
+import experiments.problem.admissibleOverpayment.AdmissibleOverpaymentExperiment;
 import experiments.problem.cryptSum.CryptSumExperiment;
 import experiments.problem.rotateMatrix.RotateMatrixExperiment;
 import experiments.problem.sudokuChecker.SudokuCheckerExperiment;
@@ -57,7 +58,8 @@ public class MainApplication {
         return List.of(
             new RotateMatrixExperiment(),
             new SudokuCheckerExperiment(),
-            new CryptSumExperiment()
+            new CryptSumExperiment(),
+            new AdmissibleOverpaymentExperiment()
         );
     }
 }
