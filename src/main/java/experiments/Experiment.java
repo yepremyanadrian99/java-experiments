@@ -21,6 +21,6 @@ public abstract class Experiment {
     protected abstract void execute();
 
     protected void afterExecute() {
-        System.out.printf("Finished %s.%n", getClass().getSimpleName());
+        System.out.printf("Finished %s.%n%n", getClass().getSimpleName());
     }
 }

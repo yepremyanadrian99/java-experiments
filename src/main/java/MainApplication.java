@@ -4,6 +4,8 @@ import java.util.List;
 
 import experiments.Experiment;
 import experiments.dataStructure.avl.AVLExperiment;
+import experiments.dataStructure.hashMap.SimpleHashMapExperiment;
+import experiments.dataStructure.hashSet.SimpleHashSetExperiment;
 import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;
@@ -43,7 +45,9 @@ public class MainApplication {
 
     private static List<Experiment> dataStructureExperiments() {
         return List.of(
-            new AVLExperiment()
+            new AVLExperiment(),
+            new SimpleHashMapExperiment(),
+            new SimpleHashSetExperiment()
         );
     }
 
