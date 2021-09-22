@@ -1,46 +1,34 @@
-package experiments.dataStructure.redBlackTree;
+package experiments.dataStructure.bst_generics_not_working.redBlackTree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Consumer;
 
+import experiments.dataStructure.bst_generics_not_working.common.AbstractBST;
+import experiments.dataStructure.bst_generics_not_working.common.AbstractBSTNode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class RedBlackTree<T extends Comparable<T>> {
+public class RedBlackTree<T extends Comparable<T>> extends AbstractBST<T, RedBlackTree.Node<T>> {
 
     private static final String CANT_BE_NULL_ERROR = "can't be null";
     private static final String GRAND_PARENT_IS_NULL_ERROR = "Grand parent " + CANT_BE_NULL_ERROR;
     private static final String UNCLE_IS_NULL_ERROR = "Grand parent " + CANT_BE_NULL_ERROR;
 
-    public static final Node NIL = new Node(Node.BLACK);
+    public static final Node NIL = new Node(Node.Color.BLACK);
 
-    private Node<T> root = NIL;
+    public RedBlackTree() {
+        root = NIL;
+    }
 
+    @Override
     public void insert(T value) {
-        this.root = internalInsert(null, this.root, value);
+        setRoot(internalInsert(null, getRoot(), value));
     }
 
+    @Override
     public void printAsTree() {
-        this.root.print(this.root.blackHeight, this.root.blackHeight - 1);
-    }
-
-    public List<T> asList() {
-        List<T> list = new ArrayList<>();
-        internalDFS(this.root, list);
-        return list;
-    }
-
-    private void internalDFS(Node<T> node, List<T> list) {
-        if (node == NIL) {
-            return;
-        }
-        internalDFS(node.getLeft(), list);
-        list.add(node.getValue());
-        internalDFS(node.getRight(), list);
+        getRoot().print(Utils::printer, getRoot().blackHeight, getRoot().blackHeight - 1);
     }
 
     private Node<T> internalInsert(Node<T> parent, Node<T> node, T value) {
@@ -58,7 +46,7 @@ public class RedBlackTree<T extends Comparable<T>> {
             }
         }
         Utils.calculateAndAssignBlackHeight(node);
-        if (this.root.isNil() || this.root == node || parent == null) {
+        if (getRoot().isNil() || getRoot() == node || parent == null) {
             node.setBlack();
             return node;
         }
@@ -148,28 +136,34 @@ public class RedBlackTree<T extends Comparable<T>> {
 
     @Getter
     @Setter
-    @ToString(exclude = {"parent", "left", "right"})
-    public static class Node<T extends Comparable<T>> {
+    @ToString(exclude = {"parent"})
+    public static class Node<T extends Comparable<T>> extends AbstractBSTNode<T, Node<T>> {
 
-        private static final byte RED = 0;
-        private static final byte BLACK = 1;
-
-        private T value;
         private Node<T> parent;
-        private Node<T> left;
-        private Node<T> right;
         private int blackHeight = 0;
-        private byte color;
+        private Color color;
 
-        public Node(byte color) {
+        public Node(Color color) {
             this.color = color;
         }
 
         public Node(T value) {
-            this(RED);
+            this(Color.RED);
             this.value = value;
-            this.left = NIL;
-            this.right = NIL;
+            super.left = NIL;
+            super.right = NIL;
+        }
+
+        @Override
+        public void setLeft(Node<T> left) {
+            super.setLeft(left);
+            this.left.parent = this;
+        }
+
+        @Override
+        public void setRight(Node<T> right) {
+            super.setLeft(left);
+            this.right.parent = this;
         }
 
         public void setParent(Node<T> parent) {
@@ -184,51 +178,45 @@ public class RedBlackTree<T extends Comparable<T>> {
             }
         }
 
-        public void setLeft(Node<T> left) {
-            this.left = left;
-            this.left.parent = this;
-        }
-
-        public void setRight(Node<T> right) {
-            this.right = right;
-            this.right.parent = this;
-        }
-
         public boolean isNil() {
             return this == NIL;
         }
 
         public boolean isRed() {
-            return this.color == RED;
+            return this.color == Color.RED;
         }
 
         public void setRed() {
-            this.color = RED;
+            this.color = Color.RED;
         }
 
         public boolean isBlack() {
-            return this.color == BLACK;
+            return this.color == Color.BLACK;
         }
 
         public void setBlack() {
-            this.color = BLACK;
+            this.color = Color.BLACK;
         }
 
-        public void print(int maxHeight, int i) {
+        public void print(Consumer<Node<T>> printer, int maxHeight, int i) {
             String prefix = "-".repeat(maxHeight - i);
             if (this.isNil()) {
                 System.out.println("NIL");
             } else {
-                System.out.println("V: " + this.value + " C: " + (this.color == RED ? "RED" : "BLACK") + " BH: " + this.blackHeight);
+                printer.accept(this);
             }
             if (this.left != null) {
                 System.out.print(prefix + "Left:  ");
-                this.left.print(maxHeight, i - 1);
+                this.left.print(printer, maxHeight, i - 1);
             }
             if (this.right != null) {
                 System.out.print(prefix + "Right: ");
-                this.right.print(maxHeight, i - 1);
+                this.right.print(printer, maxHeight, i - 1);
             }
+        }
+
+        public enum Color {
+            RED, BLACK
         }
     }
 }

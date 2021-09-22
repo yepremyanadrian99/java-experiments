@@ -1,4 +1,4 @@
-package experiments.dataStructure.avlTree;
+package experiments.dataStructure.bst_generics_not_working.avlTree;
 
 import java.util.List;
 

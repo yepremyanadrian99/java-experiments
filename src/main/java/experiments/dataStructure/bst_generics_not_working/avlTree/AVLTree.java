@@ -1,61 +1,28 @@
-package experiments.dataStructure.avlTree;
+package experiments.dataStructure.bst_generics_not_working.avlTree;
 
-import static experiments.dataStructure.avlTree.Utils.MAX_BALANCE_FACTOR;
-import static experiments.dataStructure.avlTree.Utils.MIN_BALANCE_FACTOR;
+import static experiments.dataStructure.bst_generics_not_working.avlTree.Utils.MAX_BALANCE_FACTOR;
+import static experiments.dataStructure.bst_generics_not_working.avlTree.Utils.MIN_BALANCE_FACTOR;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
+import experiments.dataStructure.bst_generics_not_working.common.AbstractBST;
+import experiments.dataStructure.bst_generics_not_working.common.AbstractBSTNode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AVLTree<T extends Comparable<T>> {
+public class AVLTree<T extends Comparable<T>> extends AbstractBST<T, AVLTree.Node<T>> {
 
     private Node<T> root;
 
+    @Override
     public void insert(T value) {
         this.root = internalInsert(this.root, value);
     }
 
-    /**
-     * <b>Careful! Balancing is not done after removing elements.</b>
-     */
-    public void delete(T value) {
-        internalDelete(this.root, value);
-    }
-
-    public boolean search(T value) {
-        return find(value) != null;
-    }
-
-    public Node<T> find(T value) {
-        if (value == null) {
-            return null;
-        }
-        return internalFind(this.root, value);
-    }
-
+    @Override
     public void printAsTree() {
         System.out.print("Root: ");
         this.root.print(this.root.height, this.root.height - 1);
-    }
-
-    public List<T> asList() {
-        List<T> list = new ArrayList<>();
-        internalDFS(this.root, list);
-        return list;
-    }
-
-    private void internalDFS(Node<T> node, List<T> list) {
-        if (node == null) {
-            return;
-        }
-        internalDFS(node.getLeft(), list);
-        list.add(node.getValue());
-        internalDFS(node.getRight(), list);
     }
 
     private Node<T> internalInsert(Node<T> node, T value) {
@@ -98,62 +65,6 @@ public class AVLTree<T extends Comparable<T>> {
         return node;
     }
 
-    // TODO: Implement balancing.
-    private void internalDelete(Node<T> node, T value) {
-        Node<T> parent = null;
-        Node<T> current = node;
-        while (current != null && current.value.compareTo(value) != 0) {
-            parent = current;
-            int comparison = value.compareTo(current.value);
-            if (comparison > 0) {
-                current = current.right;
-            } else if (comparison < 0) {
-                current = current.left;
-            }
-        }
-        if (current == null) {
-            return;
-        }
-        // Case 1. No children
-        if (current.left == null && current.right == null) {
-            if (current == this.root) {
-                this.root = null;
-            } else if (parent != null) {
-                if (parent.left == current) {
-                    parent.left = null;
-                } else {
-                    parent.right = null;
-                }
-            }
-        }
-        // Case 2. One child
-        else if (current.left == null || current.right == null) {
-            Node<T> nonNullNode = Objects.requireNonNullElse(current.left, current.right);
-            if (current == node) {
-                this.root = nonNullNode;
-            }
-        }
-        // Case 3. Two children
-        else {
-            Node<T> toSwap = Utils.getMinSuccessor(current.getRight());
-            internalDelete(current, toSwap.value);
-            current.value = toSwap.value;
-        }
-    }
-
-    private Node<T> internalFind(Node<T> node, T value) {
-        if (node == null) {
-            return null;
-        }
-        int comparison = value.compareTo(node.value);
-        if (comparison > 0) {
-            return internalFind(node.right, value);
-        } else if (comparison < 0) {
-            return internalFind(node.left, value);
-        }
-        return node;
-    }
-
     private Node<T> internalLeftRotate(Node<T> node) {
         Node<T> right = node.right;
         Node<T> rightLeft = right.left;
@@ -192,7 +103,7 @@ public class AVLTree<T extends Comparable<T>> {
 
     @Getter
     @Setter
-    public static class Node<T extends Comparable<T>> {
+    public static class Node<T extends Comparable<T>> extends AbstractBSTNode<T, Node<T>> {
 
         private static final String TREE_PREFIX = "-";
 

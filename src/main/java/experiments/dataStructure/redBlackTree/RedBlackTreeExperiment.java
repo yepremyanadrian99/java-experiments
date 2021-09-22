@@ -1,12 +1,21 @@
 package experiments.dataStructure.redBlackTree;
 
+import java.util.List;
+
 import experiments.Experiment;
 
 public class RedBlackTreeExperiment extends Experiment {
 
+    private static final List<Integer> EXPECTED_RESULT = List.of(
+        1, 2, 7, 10, 15, 20, 30, 35, 40
+    );
+
     @Override
     protected void execute() {
         RedBlackTree<Integer> tree = new RedBlackTree<>();
+        tree.insert(10);
+        tree.insert(10);
+        tree.insert(10);
         tree.insert(10);
         tree.insert(7);
         tree.insert(15);
@@ -16,18 +25,8 @@ public class RedBlackTreeExperiment extends Experiment {
         tree.insert(1);
         tree.insert(40);
         tree.insert(35);
-        tree.print();
-        tree.printAsArray();
+        tree.printAsTree();
+        List<Integer> result = tree.asList();
+        System.out.println("Red-Black Tree works correctly: " + EXPECTED_RESULT.equals(result));
     }
-/*
-  Should be before delete:
-
-          5
-       /     \
-     2         7
-   /   \     /   \
-  1     4   6     15
-       /         /   \
-     3         9      16
-*/
 }
