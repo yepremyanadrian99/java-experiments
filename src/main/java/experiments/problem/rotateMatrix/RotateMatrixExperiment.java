@@ -34,7 +34,7 @@ public class RotateMatrixExperiment extends Experiment {
     private void rotateImage(int[][] arr) {
         int n = arr.length;
         for (int i = 0; i < n / 2; ++i) {
-            for (int j = i; j <= n - 2 - i; ++j) {
+            for (int j = i; j < n - 1 - i; ++j) {
                 int temp = move(arr, j, n - 1 - i, arr[i][j]);
                 temp = move(arr, n - 1 - i, n - 1 - j, temp);
                 temp = move(arr, n - 1 - j, i, temp);

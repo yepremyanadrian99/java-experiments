@@ -1,4 +1,4 @@
-package experiments.dataStructure.avl;
+package experiments.dataStructure.avlTree;
 
 import experiments.Experiment;
 
@@ -23,7 +23,7 @@ public class AVLExperiment extends Experiment {
         tree.print();
     }
 /*
-      Should be:
+  Should be before delete:
 
           5
        /     \
