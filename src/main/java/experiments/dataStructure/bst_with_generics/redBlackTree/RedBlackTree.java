@@ -1,9 +1,9 @@
-package experiments.dataStructure.bst_generics_not_working.redBlackTree;
+package experiments.dataStructure.bst_with_generics.redBlackTree;
 
 import java.util.function.Consumer;
 
-import experiments.dataStructure.bst_generics_not_working.common.AbstractBST;
-import experiments.dataStructure.bst_generics_not_working.common.AbstractBSTNode;
+import experiments.dataStructure.bst_with_generics.common.bst.AbstractBST;
+import experiments.dataStructure.bst_with_generics.common.bstNode.AbstractBSTNode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,14 +11,19 @@ import lombok.ToString;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class RedBlackTree<T extends Comparable<T>> extends AbstractBST<T, RedBlackTree.Node<T>> {
 
+    public static final Node NIL = new Node(Node.Color.BLACK);
+
     private static final String CANT_BE_NULL_ERROR = "can't be null";
     private static final String GRAND_PARENT_IS_NULL_ERROR = "Grand parent " + CANT_BE_NULL_ERROR;
     private static final String UNCLE_IS_NULL_ERROR = "Grand parent " + CANT_BE_NULL_ERROR;
 
-    public static final Node NIL = new Node(Node.Color.BLACK);
-
     public RedBlackTree() {
         root = NIL;
+    }
+
+    @Override
+    public Node<T> nullNodeValue() {
+        return NIL;
     }
 
     @Override
@@ -46,7 +51,7 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBST<T, RedBla
             }
         }
         Utils.calculateAndAssignBlackHeight(node);
-        if (getRoot().isNil() || getRoot() == node || parent == null) {
+        if (root.isNil() || root == node || parent == null) {
             node.setBlack();
             return node;
         }
@@ -162,7 +167,7 @@ public class RedBlackTree<T extends Comparable<T>> extends AbstractBST<T, RedBla
 
         @Override
         public void setRight(Node<T> right) {
-            super.setLeft(left);
+            super.setRight(right);
             this.right.parent = this;
         }
 

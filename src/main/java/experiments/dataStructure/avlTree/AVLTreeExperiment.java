@@ -1,10 +1,10 @@
-package experiments.dataStructure.bst_generics_not_working.avlTree;
+package experiments.dataStructure.avlTree;
 
 import java.util.List;
 
 import experiments.Experiment;
 
-public class AVLExperiment extends Experiment {
+public class AVLTreeExperiment extends Experiment {
 
     private static final List<Integer> EXPECTED_RESULT = List.of(
         1, 2, 3, 4, 6, 7, 9, 15, 16
@@ -28,6 +28,7 @@ public class AVLExperiment extends Experiment {
         tree.delete(5);
         tree.printAsTree();
         List<Integer> result = tree.asList();
+        System.out.println(result);
         System.out.println("AVL Tree works correctly: " + EXPECTED_RESULT.equals(result));
     }
 }

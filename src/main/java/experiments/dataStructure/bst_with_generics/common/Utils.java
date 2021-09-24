@@ -1,4 +1,6 @@
-package experiments.dataStructure.bst_generics_not_working.common;
+package experiments.dataStructure.bst_with_generics.common;
+
+import experiments.dataStructure.bst_with_generics.common.bstNode.BSTNode;
 
 public class Utils {
 

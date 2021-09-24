@@ -1,32 +1,39 @@
-package experiments.dataStructure.bst_generics_not_working.avlTree;
+package experiments.dataStructure.bst_with_generics.avlTree;
 
-import static experiments.dataStructure.bst_generics_not_working.avlTree.Utils.MAX_BALANCE_FACTOR;
-import static experiments.dataStructure.bst_generics_not_working.avlTree.Utils.MIN_BALANCE_FACTOR;
+import static experiments.dataStructure.bst_with_generics.avlTree.Utils.MAX_BALANCE_FACTOR;
+import static experiments.dataStructure.bst_with_generics.avlTree.Utils.MIN_BALANCE_FACTOR;
 
-import experiments.dataStructure.bst_generics_not_working.common.AbstractBST;
-import experiments.dataStructure.bst_generics_not_working.common.AbstractBSTNode;
+import java.util.function.Consumer;
+
+import experiments.dataStructure.bst_with_generics.common.bst.AbstractBST;
+import experiments.dataStructure.bst_with_generics.common.bstNode.AbstractBSTNode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class AVLTree<T extends Comparable<T>> extends AbstractBST<T, AVLTree.Node<T>> {
 
-    private Node<T> root;
+    private static final Node NULL_NODE = null;
+
+    @Override
+    public Node<T> nullNodeValue() {
+        return NULL_NODE;
+    }
 
     @Override
     public void insert(T value) {
-        this.root = internalInsert(this.root, value);
+        root = internalInsert(root, value);
     }
 
     @Override
     public void printAsTree() {
-        System.out.print("Root: ");
-        this.root.print(this.root.height, this.root.height - 1);
+        getRoot().print(Utils::printer, getRoot().getHeight(), getRoot().getHeight() - 1);
     }
 
     private Node<T> internalInsert(Node<T> node, T value) {
-        if (node == null) {
+        if (node == NULL_NODE) {
             node = new Node<>(value);
         } else {
             int comparison = value.compareTo(node.value);
@@ -116,16 +123,16 @@ public class AVLTree<T extends Comparable<T>> extends AbstractBST<T, AVLTree.Nod
             this.value = value;
         }
 
-        public void print(int maxHeight, int i) {
+        public void print(Consumer<Node<T>> printer, int maxHeight, int i) {
             String prefix = "-".repeat(maxHeight - i);
             System.out.println(this.value);
-            if (this.left != null) {
+            if (this.left != NULL_NODE) {
                 System.out.print(prefix + "Left: ");
-                this.left.print(maxHeight, i - 1);
+                this.left.print(printer, maxHeight, i - 1);
             }
-            if (this.right != null) {
+            if (this.right != NULL_NODE) {
                 System.out.print(prefix + "Right: ");
-                this.right.print(maxHeight, i - 1);
+                this.right.print(printer, maxHeight, i - 1);
             }
         }
     }

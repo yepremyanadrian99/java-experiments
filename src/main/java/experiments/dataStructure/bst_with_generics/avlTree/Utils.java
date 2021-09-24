@@ -1,4 +1,4 @@
-package experiments.dataStructure.bst_generics_not_working.avlTree;
+package experiments.dataStructure.bst_with_generics.avlTree;
 
 public class Utils {
 
@@ -18,5 +18,9 @@ public class Utils {
 
     public static <T extends Comparable<T>> int getBalanceFactor(AVLTree.Node<T> node) {
         return Utils.getHeight(node.getLeft()) - Utils.getHeight(node.getRight());
+    }
+
+    public static <T extends Comparable<T>> void printer(AVLTree.Node<T> node) {
+        System.out.println("V: " + node.getValue() + " H: " + node.getHeight());
     }
 }

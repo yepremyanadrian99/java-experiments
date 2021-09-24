@@ -1,4 +1,4 @@
-package experiments.dataStructure.bst_generics_not_working.common;
+package experiments.dataStructure.bst_with_generics.common.bstNode;
 
 public interface BSTNode<T extends Comparable<T>, N extends BSTNode<T, N>> {
 

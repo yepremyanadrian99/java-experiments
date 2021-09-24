@@ -1,9 +1,11 @@
-package experiments.dataStructure.bst_generics_not_working.common;
+package experiments.dataStructure.bst_with_generics.common.bst;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import experiments.dataStructure.bst_with_generics.common.Utils;
+import experiments.dataStructure.bst_with_generics.common.bstNode.BSTNode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,17 +15,19 @@ public abstract class AbstractBST<T extends Comparable<T>, N extends BSTNode<T, 
 
     protected N root;
 
+    public abstract N nullNodeValue();
+
     @Override
     public N find(T value) {
         if (value == null) {
-            return null;
+            return nullNodeValue();
         }
         return internalFind(this.root, value);
     }
 
     @Override
     public boolean contains(T value) {
-        return find(value) != null;
+        return find(value) != nullNodeValue();
     }
 
     /**
@@ -42,8 +46,8 @@ public abstract class AbstractBST<T extends Comparable<T>, N extends BSTNode<T, 
     }
 
     private N internalFind(N node, T value) {
-        if (node == null) {
-            return null;
+        if (node == nullNodeValue()) {
+            return nullNodeValue();
         }
         int comparison = value.compareTo(node.getValue());
         if (comparison > 0) {
@@ -55,9 +59,9 @@ public abstract class AbstractBST<T extends Comparable<T>, N extends BSTNode<T, 
     }
 
     private void internalDelete(N node, T value) {
-        N parent = null;
+        N parent = nullNodeValue();
         N current = node;
-        while (current != null && current.getValue().compareTo(value) != 0) {
+        while (current != nullNodeValue() && current.getValue().compareTo(value) != 0) {
             parent = current;
             int comparison = value.compareTo(current.getValue());
             if (comparison > 0) {
@@ -66,23 +70,23 @@ public abstract class AbstractBST<T extends Comparable<T>, N extends BSTNode<T, 
                 current = current.getLeft();
             }
         }
-        if (current == null) {
+        if (current == nullNodeValue()) {
             return;
         }
         // Case 1. No children
-        if (current.getLeft() == null && current.getRight() == null) {
+        if (current.getLeft() == nullNodeValue() && current.getRight() == nullNodeValue()) {
             if (current == this.root) {
-                this.root = null;
-            } else if (parent != null) {
+                this.root = nullNodeValue();
+            } else if (parent != nullNodeValue()) {
                 if (parent.getLeft() == current) {
-                    parent.setLeft(null);
+                    parent.setLeft(nullNodeValue());
                 } else {
-                    parent.setRight(null);
+                    parent.setRight(nullNodeValue());
                 }
             }
         }
         // Case 2. One child
-        else if (current.getLeft() == null || current.getRight() == null) {
+        else if (current.getLeft() == nullNodeValue() || current.getRight() == nullNodeValue()) {
             N nonNullNode = Objects.requireNonNullElse(current.getLeft(), current.getRight());
             if (current == node) {
                 this.root = nonNullNode;
@@ -97,7 +101,7 @@ public abstract class AbstractBST<T extends Comparable<T>, N extends BSTNode<T, 
     }
 
     private void internalDFS(N node, List<T> list) {
-        if (node == null) {
+        if (node == nullNodeValue()) {
             return;
         }
         internalDFS(node.getLeft(), list);

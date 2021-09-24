@@ -1,4 +1,4 @@
-package experiments.dataStructure.bst_generics_not_working.redBlackTree;
+package experiments.dataStructure.bst_with_generics.redBlackTree;
 
 import java.util.Optional;
 

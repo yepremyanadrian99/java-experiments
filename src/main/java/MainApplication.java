@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import experiments.Experiment;
-import experiments.dataStructure.avlTree.AVLExperiment;
+import experiments.dataStructure.avlTree.AVLTreeExperiment;
 import experiments.dataStructure.hashMap.SimpleHashMapExperiment;
 import experiments.dataStructure.hashSet.SimpleHashSetExperiment;
 import experiments.dataStructure.redBlackTree.RedBlackTreeExperiment;
@@ -46,7 +46,7 @@ public class MainApplication {
 
     private static List<Experiment> dataStructureExperiments() {
         return List.of(
-            new AVLExperiment(),
+            new AVLTreeExperiment(),
             new RedBlackTreeExperiment(),
             new SimpleHashMapExperiment(),
             new SimpleHashSetExperiment()
