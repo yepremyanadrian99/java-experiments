@@ -3,6 +3,7 @@ package experiments.sorting.common;
 import java.util.List;
 
 import experiments.Experiment;
+import experiments.utils.Utils;
 
 public class SortingExperiment<T extends Comparable<T>> extends Experiment {
 
@@ -28,6 +29,7 @@ public class SortingExperiment<T extends Comparable<T>> extends Experiment {
     @Override
     protected void afterExecute() {
         System.out.println("  Sorted list: " + list);
+        System.out.println("Sorting works correctly: " + Utils.isAscSorted(list));
         System.out.printf("Finished %s.%n%n", algorithm.getClass().getSimpleName());
     }
 }

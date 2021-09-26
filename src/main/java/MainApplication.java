@@ -20,6 +20,7 @@ import experiments.sorting.bubbleSort.BubbleSort;
 import experiments.sorting.common.SortingAlgorithm;
 import experiments.sorting.common.SortingExperiment;
 import experiments.sorting.countingSort.CountingSort;
+import experiments.sorting.heapSort.HeapSort;
 import experiments.sorting.insertionSort.InsertionSort;
 import experiments.sorting.mergeSort.MergeSort;
 import experiments.sorting.quickSort.QuickSort;
@@ -77,7 +78,8 @@ public class MainApplication {
             new InsertionSort<>(),
             new MergeSort<>(),
             new QuickSort<>(),
-            new CountingSort()
+            new CountingSort(),
+            new HeapSort<>()
         ).map(algorithm -> new SortingExperiment<>(listSupplier.get(), algorithm));
     }
 }

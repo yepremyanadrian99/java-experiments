@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import experiments.Experiment;
+import experiments.utils.Utils;
 
 public class HeapExperiment extends Experiment {
 
@@ -16,8 +17,8 @@ public class HeapExperiment extends Experiment {
         Heap<Integer> minHeap = new Heap<>(list, false);
 
         System.out.println("Original: " + list);
-        System.out.println("MaxHeap: " + minHeap.getList());
-        System.out.println("MinHeap: " + maxHeap.getList());
+        System.out.println("MaxHeap: " + maxHeap.getList());
+        System.out.println("MinHeap: " + minHeap.getList());
 
         int maxValue = maxHeap.peekRoot();
         int minValue = minHeap.peekRoot();
