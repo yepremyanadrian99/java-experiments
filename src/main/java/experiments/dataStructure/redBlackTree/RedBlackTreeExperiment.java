@@ -29,5 +29,7 @@ public class RedBlackTreeExperiment extends Experiment {
         List<Integer> result = tree.asList();
         System.out.println(result);
         System.out.println("Red-Black Tree works correctly: " + EXPECTED_RESULT.equals(result));
+        System.out.println("DFS: " + tree.dfs());
+        System.out.println("BFS: " + tree.bfs());
     }
 }

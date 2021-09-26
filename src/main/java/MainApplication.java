@@ -6,6 +6,7 @@ import experiments.Experiment;
 import experiments.dataStructure.avlTree.AVLTreeExperiment;
 import experiments.dataStructure.hashMap.SimpleHashMapExperiment;
 import experiments.dataStructure.hashSet.SimpleHashSetExperiment;
+import experiments.dataStructure.heap.HeapExperiment;
 import experiments.dataStructure.redBlackTree.RedBlackTreeExperiment;
 import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
@@ -49,7 +50,8 @@ public class MainApplication {
             new AVLTreeExperiment(),
             new RedBlackTreeExperiment(),
             new SimpleHashMapExperiment(),
-            new SimpleHashSetExperiment()
+            new SimpleHashSetExperiment(),
+            new HeapExperiment()
         );
     }
 

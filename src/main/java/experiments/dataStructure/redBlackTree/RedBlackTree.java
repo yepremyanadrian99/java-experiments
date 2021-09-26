@@ -29,8 +29,21 @@ public class RedBlackTree<T extends Comparable<T>> {
     }
 
     public List<T> asList() {
+        return dfs();
+    }
+
+    public List<T> dfs() {
         List<T> list = new ArrayList<>();
         internalDFS(this.root, list);
+        return list;
+    }
+
+    public List<T> bfs() {
+        List<T> list = new ArrayList<>();
+        int height = this.root.blackHeight;
+        for (int level = height; level >= 0; --level) {
+            internalBFS(this.root, this.root.blackHeight, level, list);
+        }
         return list;
     }
 
@@ -41,6 +54,18 @@ public class RedBlackTree<T extends Comparable<T>> {
         internalDFS(node.getLeft(), list);
         list.add(node.getValue());
         internalDFS(node.getRight(), list);
+    }
+
+    private void internalBFS(Node<T> node, int current, int level, List<T> list) {
+        if (node == NIL) {
+            return;
+        }
+        if (current == level) {
+            list.add(node.value);
+            return;
+        }
+        internalBFS(node.left, current - 1, level, list);
+        internalBFS(node.right, current - 1, level, list);
     }
 
     private Node<T> internalInsert(Node<T> parent, Node<T> node, T value) {
