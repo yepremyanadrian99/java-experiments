@@ -1,42 +1,26 @@
-package experiments.sorting;
+package experiments.sorting.countingSort;
 
 import java.util.Collections;
 import java.util.List;
 
-import experiments.Experiment;
+import experiments.sorting.common.SortingAlgorithm;
 
-public class BucketSortExperiment extends Experiment {
-
-    private final List<Integer> list;
-
-    public BucketSortExperiment(List<Integer> list) {
-        this.list = list;
-    }
+public class CountingSort implements SortingAlgorithm<Integer, List<Integer>> {
 
     @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
-        System.out.println("Unsorted list: " + list);
-    }
-
-    @Override
-    protected void execute() {
+    public void sort(List<Integer> list) {
         int minElem = Collections.min(list, Integer::compareTo);
         int maxElem = Collections.max(list, Integer::compareTo);
         if (minElem >= 0) {
-            bucketSort(maxElem);
+            // Positive-Only array elements.
+            internalSort(list, maxElem);
         } else {
-            bucketSortMixed(minElem, maxElem);
+            // Negative-Positive array elements.
+            internalSort(list, minElem, maxElem);
         }
     }
 
-    @Override
-    protected void afterExecute() {
-        System.out.println("  Sorted list: " + list);
-        super.afterExecute();
-    }
-
-    private void bucketSort(int maxElem) {
+    private void internalSort(List<Integer> list, int maxElem) {
         int[] bucket = new int[maxElem + 1];
         for (int i = 0; i < list.size(); ++i) {
             bucket[i] = 0;
@@ -52,7 +36,7 @@ public class BucketSortExperiment extends Experiment {
         }
     }
 
-    private void bucketSortMixed(int minElem, int maxElem) {
+    private void internalSort(List<Integer> list, int minElem, int maxElem) {
         int size = Math.abs(minElem) + Math.abs(maxElem) + 1;
         int[] bucket = new int[size];
         for (int i = 0; i < list.size(); ++i) {

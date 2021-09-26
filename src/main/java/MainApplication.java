@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import experiments.Experiment;
 import experiments.dataStructure.avlTree.AVLTreeExperiment;
@@ -15,12 +16,15 @@ import experiments.problem.admissibleOverpayment.AdmissibleOverpaymentExperiment
 import experiments.problem.cryptSum.CryptSumExperiment;
 import experiments.problem.rotateMatrix.RotateMatrixExperiment;
 import experiments.problem.sudokuChecker.SudokuCheckerExperiment;
-import experiments.sorting.BubbleSortExperiment;
-import experiments.sorting.BucketSortExperiment;
-import experiments.sorting.InsertionSortExperiment;
-import experiments.sorting.MergeSortExperiment;
-import experiments.sorting.QuickSortExperiment;
-import experiments.sorting.SelectionSortExperiment;
+import experiments.sorting.bubbleSort.BubbleSort;
+import experiments.sorting.common.SortingAlgorithm;
+import experiments.sorting.common.SortingExperiment;
+import experiments.sorting.countingSort.CountingSort;
+import experiments.sorting.insertionSort.InsertionSort;
+import experiments.sorting.mergeSort.MergeSort;
+import experiments.sorting.quickSort.QuickSort;
+import experiments.sorting.selectionSort.SelectionSort;
+import experiments.utils.Utils;
 
 public class MainApplication {
 
@@ -34,15 +38,10 @@ public class MainApplication {
     }
 
     private static List<Experiment> sortingExperiments() {
-        return List.of(
-            new BubbleSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))),
-            new SelectionSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))),
-            new InsertionSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))),
-            new MergeSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))),
-            new QuickSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10))),
-            new BucketSortExperiment(new ArrayList<>(Arrays.asList(5, 8, 6, 8, 0, 8, 10, 0, 8, 5, 15, 10))),
-            new BucketSortExperiment(new ArrayList<>(Arrays.asList(-5, 8, 6, 8, 0, 8, -10, 0, -8, 5, 15, 10)))
-        );
+        return Stream.concat(
+            getStreamOfExperiments(Utils::getNewPositiveList),
+            getStreamOfExperiments(Utils::getNewMixedList)
+        ).collect(Collectors.toList());
     }
 
     private static List<Experiment> dataStructureExperiments() {
@@ -69,5 +68,16 @@ public class MainApplication {
             new CryptSumExperiment(),
             new AdmissibleOverpaymentExperiment()
         );
+    }
+
+    private static Stream<SortingExperiment<Integer>> getStreamOfExperiments(Supplier<List<Integer>> listSupplier) {
+        return Stream.<SortingAlgorithm<Integer, List<Integer>>>of(
+            new BubbleSort<>(),
+            new SelectionSort<>(),
+            new InsertionSort<>(),
+            new MergeSort<>(),
+            new QuickSort<>(),
+            new CountingSort()
+        ).map(algorithm -> new SortingExperiment<>(listSupplier.get(), algorithm));
     }
 }
