@@ -13,6 +13,7 @@ import experiments.executor.ExperimentExecutor;
 import experiments.pattern.decorator.DecoratorExperiment;
 import experiments.pattern.strategy.StrategyPatternExperiment;
 import experiments.problem.admissibleOverpayment.AdmissibleOverpaymentExperiment;
+import experiments.problem.bstInorderSuccessor.BSTInorderSuccessorExperiment;
 import experiments.problem.cryptSum.CryptSumExperiment;
 import experiments.problem.rotateMatrix.RotateMatrixExperiment;
 import experiments.problem.sudokuChecker.SudokuCheckerExperiment;
@@ -67,7 +68,8 @@ public class MainApplication {
             new RotateMatrixExperiment(),
             new SudokuCheckerExperiment(),
             new CryptSumExperiment(),
-            new AdmissibleOverpaymentExperiment()
+            new AdmissibleOverpaymentExperiment(),
+            new BSTInorderSuccessorExperiment()
         );
     }
 
