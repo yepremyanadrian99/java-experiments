@@ -16,6 +16,7 @@ import experiments.problem.admissibleOverpayment.AdmissibleOverpaymentExperiment
 import experiments.problem.bstInorderSuccessor.BSTInorderSuccessorExperiment;
 import experiments.problem.cryptSum.CryptSumExperiment;
 import experiments.problem.rotateMatrix.RotateMatrixExperiment;
+import experiments.problem.smallestSubstring.SmallestSubstringExperiment;
 import experiments.problem.sudokuChecker.SudokuCheckerExperiment;
 import experiments.sorting.bubbleSort.BubbleSort;
 import experiments.sorting.common.SortingAlgorithm;
@@ -36,6 +37,8 @@ public class MainApplication {
             .addAll(dataStructureExperiments())
             .addAll(patternExperiments())
             .addAll(problemExperiments())
+            .clear()
+            .add(new SmallestSubstringExperiment())
             .startAll();
     }
 
