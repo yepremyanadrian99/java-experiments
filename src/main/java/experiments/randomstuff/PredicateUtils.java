@@ -2,6 +2,8 @@ package experiments.randomstuff;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 
@@ -36,9 +38,11 @@ public class PredicateUtils {
         return and(Arrays.asList(predicates));
     }
 
-    public static <T> Predicate<T> operateOnPredicates(Collection<Predicate<T>> predicates,
-                                                       BinaryOperator<Predicate<T>> operator) {
-        return predicates.stream()
+    private static <T> Predicate<T> operateOnPredicates(Collection<Predicate<T>> predicates,
+                                                        BinaryOperator<Predicate<T>> operator) {
+        return Optional.ofNullable(predicates)
+                .orElse(List.of())
+                .stream()
                 .reduce(operator)
                 .orElse(truePredicate());
     }
