@@ -7,28 +7,28 @@ public class AdmissibleOverpaymentExperiment extends Experiment {
     @Override
     protected void execute() {
         boolean isAdmissible1 = isAdmissibleOverpayment(
-            new double[]{
-                110,
-                95,
-                70
-            },
-            new String[]{
-                "10.0% higher than in-store",
-                "5.0% lower than in-store",
-                "Same as in-store"
-            },
-            5d
+                new double[]{
+                        110,
+                        95,
+                        70
+                },
+                new String[]{
+                        "10.0% higher than in-store",
+                        "5.0% lower than in-store",
+                        "Same as in-store"
+                },
+                5d
         );
         boolean isAdmissible2 = isAdmissibleOverpayment(
-            new double[]{
-                48,
-                165
-            },
-            new String[]{
-                "20.0% lower than in-store",
-                "10.00% higher than in-store"
-            },
-            2d
+                new double[]{
+                        48,
+                        165
+                },
+                new String[]{
+                        "20.0% lower than in-store",
+                        "10.00% higher than in-store"
+                },
+                2d
         );
         System.out.println("Admissible overpayment works correctly: " + (isAdmissible1 && !isAdmissible2));
     }

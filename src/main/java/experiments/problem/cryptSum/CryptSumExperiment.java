@@ -13,16 +13,16 @@ public class CryptSumExperiment extends Experiment {
         String[] wordsWrongNumber = {"HEY", "OMAR", "MONEY"};
         String[] wordsWrongSum = {"SEND", "MORE", "MONDAY"};
         char[][] solution = new char[][]{
-            {'O', '0'},
-            {'M', '1'},
-            {'Y', '2'},
-            {'A', '3'},
-            {'H', '4'},
-            {'E', '5'},
-            {'N', '6'},
-            {'D', '7'},
-            {'R', '8'},
-            {'S', '9'}
+                {'O', '0'},
+                {'M', '1'},
+                {'Y', '2'},
+                {'A', '3'},
+                {'H', '4'},
+                {'E', '5'},
+                {'N', '6'},
+                {'D', '7'},
+                {'R', '8'},
+                {'S', '9'}
         };
         boolean result1 = crypt(words, solution);
         boolean result2 = crypt(wordsWrongNumber, solution);

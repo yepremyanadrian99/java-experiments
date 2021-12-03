@@ -32,11 +32,11 @@ public class DecoratorExperiment extends Experiment {
     private void experiment2() {
         BeverageMachine beverageMachine = new BeverageMachine();
         beverageMachine.selectBeverage(new Cappuccino())
-            .addSugar()
-            .addMilk()
-            .addChocolate()
-            .addChocolate()
-            .makeBeverage();
+                .addSugar()
+                .addMilk()
+                .addChocolate()
+                .addChocolate()
+                .makeBeverage();
     }
 }
 

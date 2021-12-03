@@ -10,11 +10,11 @@ public class RotateMatrixExperiment extends Experiment {
     @Override
     protected void execute() {
         int[][] arr = {
-            {10, 9, 6, 3, 7},
-            {6, 10, 2, 9, 7},
-            {7, 6, 3, 8, 2},
-            {8, 9, 7, 9, 9},
-            {6, 8, 6, 8, 2}
+                {10, 9, 6, 3, 7},
+                {6, 10, 2, 9, 7},
+                {7, 6, 3, 8, 2},
+                {8, 9, 7, 9, 9},
+                {6, 8, 6, 8, 2}
         };
         System.out.println("Before rotation");
         Utils.printMatrix(arr);
@@ -22,11 +22,11 @@ public class RotateMatrixExperiment extends Experiment {
         System.out.println("After rotation");
         Utils.printMatrix(arr);
         int[][] expected = {
-            {6, 8, 7, 6, 10},
-            {8, 9, 6, 10, 9},
-            {6, 7, 3, 2, 6},
-            {8, 9, 8, 9, 3},
-            {2, 9, 2, 7, 7}
+                {6, 8, 7, 6, 10},
+                {8, 9, 6, 10, 9},
+                {6, 7, 3, 2, 6},
+                {8, 9, 8, 9, 3},
+                {2, 9, 2, 7, 7}
         };
         System.out.println("Matrix rotation works correctly: " + Arrays.deepEquals(arr, expected));
     }
