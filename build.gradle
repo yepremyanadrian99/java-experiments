@@ -1,11 +1,13 @@
 plugins {
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 String LOMBOK_VERSION = '1.18.22'
+String KOTLIN_VERSION = '1.9.23'
 
 repositories {
     mavenCentral()
@@ -15,10 +17,15 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:' + LOMBOK_VERSION
     annotationProcessor 'org.projectlombok:lombok:' + LOMBOK_VERSION
 
-    compile('org.apache.commons:commons-collections4:4.4')
+    implementation(platform('org.jetbrains.kotlin:kotlin-bom:' + KOTLIN_VERSION))
+    implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + KOTLIN_VERSION
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.8.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.0'
+
+    compileOnly 'org.apache.commons:commons-collections4:4.4'
 
     testCompileOnly 'org.projectlombok:lombok:' + LOMBOK_VERSION
-    testCompileOnly group: 'junit', name: 'junit', version: '4.12'
+    testCompileOnly group: 'junit', name: 'junit', version: '4.13.2'
     testAnnotationProcessor 'org.projectlombok:lombok:' + LOMBOK_VERSION
 }
 
