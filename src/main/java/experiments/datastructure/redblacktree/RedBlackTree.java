@@ -1,11 +1,10 @@
 package experiments.datastructure.redblacktree;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.*;
 
 @Getter
 @Setter
@@ -39,12 +38,20 @@ public class RedBlackTree<T extends Comparable<T>> {
     }
 
     public List<T> bfs() {
-        List<T> list = new ArrayList<>();
-        int height = this.root.blackHeight;
-        for (int level = height; level >= 0; --level) {
-            internalBFS(this.root, this.root.blackHeight, level, list);
+        if (root == null) {
+            return Collections.emptyList();
         }
-        return list;
+
+        Queue<Node<T>> queue = new ArrayDeque<>();
+        queue.add(this.root);
+        List<T> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Node<T> node = queue.poll();
+            result.add(node.value);
+            Optional.ofNullable(node.left).filter(it -> it != NIL).ifPresent(queue::add);
+            Optional.ofNullable(node.right).filter(it -> it != NIL).ifPresent(queue::add);
+        }
+        return result;
     }
 
     private void internalDFS(Node<T> node, List<T> list) {
@@ -54,18 +61,6 @@ public class RedBlackTree<T extends Comparable<T>> {
         internalDFS(node.getLeft(), list);
         list.add(node.getValue());
         internalDFS(node.getRight(), list);
-    }
-
-    private void internalBFS(Node<T> node, int current, int level, List<T> list) {
-        if (node == NIL) {
-            return;
-        }
-        if (current == level) {
-            list.add(node.value);
-            return;
-        }
-        internalBFS(node.left, current - 1, level, list);
-        internalBFS(node.right, current - 1, level, list);
     }
 
     private Node<T> internalInsert(Node<T> parent, Node<T> node, T value) {
